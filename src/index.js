@@ -1,10 +1,69 @@
-function component() {
-  const element = document.createElement('div');
+import './modules/style.css';
 
-  // Lodash, currently included via a script, is required for this line to work
-  // element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+const todoList = [
+  {
+    description: 'Read Book',
+    completed: true,
+    index: 1,
+  },
+  {
+    description: 'Eat an apple',
+    completed: false,
+    index: 2,
+  },
+  {
+    description: 'Wash the dishes',
+    completed: true,
+    index: 3,
+  },
+  {
+    description: 'Go to gym',
+    completed: false,
+    index: 4,
+  },
+];
 
-  return element;
+function showToDo() {
+  const list = document.querySelector('.list');
+  // eslint-disable-next-line no-restricted-syntax
+  for (const todo of todoList) {
+    const newlist = document.createElement('li');
+    newlist.classList.add('newlist');
+    newlist.innerHTML += `
+    <input type="checkbox" ${todo.completed ? 'checked' : ''} class="check"/>
+    <span class="text">${todo.description}</span>
+    <button class="delete"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10.001 7.8a2.2 2.2 0 1 0 0 4.402A2.2 2.2 0 0 0 10 7.8zm0-2.6A2.2 2.2 0 1 0 9.999.8a2.2 2.2 0 0 0 .002 4.4zm0 9.6a2.2 2.2 0 1 0 0 4.402 2.2 2.2 0 0 0 0-4.402z"/></svg></button>
+    `;
+    list.append(newlist);
+  }
 }
 
-document.body.appendChild(component());
+showToDo();
+
+let id = 4;
+function add(text) {
+  const todo = {
+    description: text,
+    completed: false,
+    index: (id += 1),
+  };
+  todoList.push(todo);
+  showToDo();
+}
+
+const form = document.querySelector('.main');
+form.addEventListener('submit', (event) => {
+  event.preventDefault();
+  const input = document.querySelector('.action');
+  const text = input.value.trim();
+  if (text !== '') {
+    add(text);
+    input.value = '';
+    input.focus();
+  }
+});
+
+const completed = document.querySelector('.newlist');
+completed.addEventListener('click', () => {
+  completed.classList.toggle('completed');
+});
