@@ -5,14 +5,29 @@ function showToDo(todo) {
   const newlist = document.createElement('li');
   newlist.classList.add('newlist');
   newlist.innerHTML = `
-    <input id="${todo.index}" class="check" type="checkbox"/>
+    <input type="checkbox" ${todo.index ? 'checked' : ''} class="check"/>
     <span class="text">${todo.description}</span>
     <button class="delete"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10.001 7.8a2.2 2.2 0 1 0 0 4.402A2.2 2.2 0 0 0 10 7.8zm0-2.6A2.2 2.2 0 1 0 9.999.8a2.2 2.2 0 0 0 .002 4.4zm0 9.6a2.2 2.2 0 1 0 0 4.402 2.2 2.2 0 0 0 0-4.402z"/></svg></button>
     `;
   list.append(newlist);
 }
 
-const todoList = [];
+const todoList = [{
+  description: 'Read Book',
+  completed: true,
+  index: 1,
+},
+{
+  description: 'Eat an apple',
+  completed: true,
+  index: 2,
+},
+{
+  description: 'Wash the dishes',
+  completed: true,
+  index: 3,
+},
+];
 let id = 1;
 function add(text) {
   const todo = {
