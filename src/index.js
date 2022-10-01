@@ -1,15 +1,19 @@
+/* eslint-disable no-use-before-define */
+/* eslint-disable import/no-cycle */
 import './modules/style.css';
+import { removeCompleted, toggleComplete } from './modules/interactive.js';
 
 const newTodoForm = document.querySelector('#new-todo-form');
 const todoList = document.querySelector('.todo-list');
+const clear = document.querySelector('.clearComplete');
 
 function updateTodos(newTodos) {
   const updatedTodos = [];
   for (let i = 0; i < newTodos.length; i += 1) {
     updatedTodos.push({ ...newTodos[i], id: i + 1 });
   }
+
   localStorage.setItem('todos', JSON.stringify(updatedTodos));
-  // eslint-disable-next-line no-use-before-define
   updateList();
 }
 
@@ -30,18 +34,6 @@ const removeTodo = (targetIndex) => {
   const updateList = todoListArr.filter((todo) => todo.id !== parseInt(targetIndex, 10));
   updateTodos(updateList);
 };
-
-function toggleComplete(id) {
-  const todoListArray = JSON.parse(localStorage.getItem('todos') || '[]');
-  const updateTodoList = todoListArray.map((todo) => {
-    if (todo.id === parseInt(id, 10)) {
-      return { ...todo, completed: !todo.completed };
-    }
-    return todo;
-  });
-
-  updateTodos(updateTodoList);
-}
 
 function updateList() {
   const todoListArray = JSON.parse(localStorage.getItem('todos') || '[]');
@@ -88,4 +80,11 @@ function init() {
   updateList();
 }
 
+clear.addEventListener('click', () => {
+  removeCompleted();
+});
+
 init();
+
+// eslint-disable-next-line import/prefer-default-export
+export { updateTodos };
