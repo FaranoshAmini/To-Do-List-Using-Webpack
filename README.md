@@ -10,7 +10,7 @@
 - Webpack
 
 ## Live Demo
-[Live Demo Link](https://faranoshamini.github.io/To-Do-List-Using-Webpack/dist)
+[Live Demo Link](https://faranosh-amini-to-do-list.netlify.app/)
 
 ### Get Started
 
