@@ -18,7 +18,7 @@ To get a local copy of this exercice, Please follow these simple example steps.
 
 1. Clone this repository or download the Zip folder:
 
-**`git clone git@github.com:FaranoshAmini/To-Do-List.git`**
+**`git clone git@github.com:FaranoshAmini/To-Do-List-Using-Webpack.git`**
 
 
 2. Navigate to the location of the folder in your machine:
